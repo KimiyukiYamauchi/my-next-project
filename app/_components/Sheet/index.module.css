@@ -7,14 +7,15 @@
   border-radius: 8px;
 }
 
-/* @media (max-width: 920px) {
+@media (max-width: 920px) {
   .container {
     width: calc(100% - 80px);
   }
 }
+
 @media (max-width: 640px) {
   .container {
     width: calc(100% - 32px);
     padding: 40px 16px;
   }
-} */
+}

@@ -52,7 +52,7 @@
   margin-bottom: 40px;
 }
 
-/* @media (max-width: 640px) {
+@media (max-width: 640px) {
   .text {
     text-align: left;
   }
@@ -75,4 +75,4 @@
   .position {
     text-align: center;
   }
-} */
+}
