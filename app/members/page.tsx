@@ -44,7 +44,7 @@ const data = {
 
 export default function Page() {
   return (
-    <div style={styles.container}>
+    <div className={styles.container}>
       {data.contents.length === 0 ? (
         <p className={styles.empty}>メンバーが登録されていません。</p>
       ) : (
@@ -60,8 +60,8 @@ export default function Page() {
               />
               <dl>
                 <dt className={styles.name}>{member.name}</dt>
-                <dt className={styles.position}>{member.position}</dt>
-                <dt className={styles.profile}>{member.profile}</dt>
+                <dd className={styles.position}>{member.position}</dd>
+                <dd className={styles.profile}>{member.profile}</dd>
               </dl>
             </li>
           ))}
