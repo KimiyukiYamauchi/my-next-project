@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import { getNewsDetail } from "@/app/_libs/microcms";
+import { getNewsDetail, getNewsList } from "@/app/_libs/microcms";
 import Article from "@/app/_components/Article";
 import ButtonLink from "@/app/_components/ButtonLink";
 import styles from "./page.module.css";
@@ -9,6 +9,11 @@ type Props = {
     slug: string;
   }>;
 };
+
+export async function generateStaticParams() {
+  const { contents } = await getNewsList({ fields: "id", limit: 100 });
+  return contents.map((news) => ({ slug: news.id }));
+}
 
 export default async function Page(props: Props) {
   const { slug } = await props.params;
