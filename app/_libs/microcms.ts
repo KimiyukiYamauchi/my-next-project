@@ -38,7 +38,7 @@ const client = createClient({
 });
 
 export const getMembersList = async (queries?: MicroCMSQueries) => {
-  "use cache";
+  // "use cache";
   const listData = await client.getList<Member>({
     endpoint: "members",
     queries,
@@ -47,7 +47,7 @@ export const getMembersList = async (queries?: MicroCMSQueries) => {
 };
 
 export const getNewsList = async (queries?: MicroCMSQueries) => {
-  "use cache";
+  // "use cache";
   const listData = await client.getList<News>({
     endpoint: "news",
     queries,
@@ -59,11 +59,16 @@ export const getNewsDetail = async (
   contentId: string,
   queries?: MicroCMSQueries,
 ) => {
-  "use cache";
+  // "use cache";
   const detailData = await client.getListDetail<News>({
     endpoint: "news",
     contentId,
     queries,
+    customRequestInit: {
+      next: {
+        revalidate: queries?.draftKey === undefined ? 60 : 0,
+      },
+    },
   });
   return detailData;
 };
@@ -72,7 +77,7 @@ export const getCategoryDetail = async (
   contentId: string,
   queries?: MicroCMSQueries,
 ) => {
-  "use cache";
+  // "use cache";
   const detailData = await client.getListDetail<Category>({
     endpoint: "categories",
     contentId,

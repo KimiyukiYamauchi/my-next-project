@@ -7,6 +7,8 @@ import { TOP_NEWS_LIMIT } from "@/app/_constants";
 import ButtonLink from "@/app/_components/ButtonLink";
 import NewsList from "./_components/NewsList";
 
+export const revalidate = 60;
+
 export default async function Home() {
   const name = "世界";
 
