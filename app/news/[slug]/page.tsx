@@ -1,4 +1,5 @@
 import { Suspense } from "react";
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getNewsDetail, getNewsList } from "@/app/_libs/microcms";
 import Article from "@/app/_components/Article";
@@ -15,6 +16,29 @@ type Props = {
     dk?: string;
   }>;
 };
+
+export async function generateMetadata({
+  params,
+  searchParams,
+}: Props): Promise<Metadata> {
+  // params、searchParams は Promise なので await する必要がある
+  const resolvedParams = await params;
+  const resolvedsearchParams = await searchParams;
+
+  const data = await getNewsDetail(resolvedParams.slug, {
+    draftKey: resolvedsearchParams.dk,
+  });
+
+  return {
+    title: data.title,
+    description: data.description,
+    openGraph: {
+      title: data.title,
+      description: data.description,
+      images: [data?.thumbnail?.url ?? ""],
+    },
+  };
+}
 
 export async function generateStaticParams() {
   const { contents } = await getNewsList({ fields: "id", limit: 100 });
